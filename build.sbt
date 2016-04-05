@@ -1,7 +1,9 @@
 import Dependencies._
+import Release._
 
 lazy val tristate = (
   TristateProject("tristate", file("."))
+    settings(releaseSettings: _*) 
     settings(
       packagedArtifacts := Map.empty // don't publish the default aggregate root project
     )

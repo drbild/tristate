@@ -1,0 +1,8 @@
+target/
+
+# IntelliJ
+.idea/
+.idea_modules/
+
+# Filesystem
+.DS_Store

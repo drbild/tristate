@@ -33,6 +33,13 @@ sealed abstract class Tristate[+A] extends Product with Serializable {
       case Unspecified => ifUnspecified
     }
 
+  /**
+   * Discharges this `Tristate` to an `Option` using the specified default for the `Unspecified` case.
+   * `Present(a)` goes to `Some(a)` and `Absent` goes to `None`.
+   */
+  final def specify[B >: A](default: => Option[B]): Option[B] =
+   cata(Some(_), None, default)
+
   final def getOrElse[B >: A](default: => B): B =
     cata(identity, default, default)
 
@@ -91,6 +98,6 @@ object Tristate {
   final def unspecified[A]: Tristate[A] = Unspecified
 
   final def fromOption[A](oa: Option[A]): Tristate[A] =
-   oa.fold(unspecified[A])(present(_))
+   oa.fold(absent[A])(present(_))
 
 }

@@ -18,9 +18,15 @@ object TristateTests extends SpecLite {
     ))
   }
 
-  "present and unspecified preserved through Option" ! forAll { x: Tristate[Int] => !x.isAbsent ==>
+  "present preserved through Option" ! forAll { x: Tristate[Int] => !x.isUnspecified ==>
     propBoolean(Tristate.fromOption(x.toOption) == x)
   }
+
+  "present and absent preserved through specify" ! forAll { (x: Tristate[Int], y: Option[Int]) => !x.isUnspecified ==>
+    propBoolean(Tristate.fromOption(x specify y) == x)
+  }
+
+  "unspecified specifies to default" ! forAll { x: Option[Int] => unspecified specify x must_== x }
 
   "present is present" ! forAll { x: Int => present(x).isPresent }
 
@@ -40,9 +46,7 @@ object TristateTests extends SpecLite {
 
   "unspecified isn't absent" ! check (!unspecified.isAbsent)
 
-  "present to option is Some" ! forAll { x: Tristate[Int] => x.isPresent ==>
-    propBoolean(x.toOption.isDefined)
-  }
+  "present to option is Some" ! forAll { x: Int => present(x).toOption == Some(x) }
 
   "absent or unspecified to option is None" ! forAll { x: Tristate[Int] => !x.isPresent ==>
     propBoolean(x.toOption == None)

@@ -16,24 +16,24 @@
 
 ## Installation
 
-Add the following to your sbt build (Scala 2.10.x and Scala 2.11.x):
+Add the following to your sbt build:
 
 ```scala
 libraryDependencies += "org.davidbild" %% "tristate-core" % "0.1.0"
 ```
 
-To support de/serialization using Play JSON, also add (Scala 2.10.x and Scala 2.11.x):
+To support de/serialization using Play JSON, also add:
 
 ```scala
 libraryDependencies += "org.davidbild" %% "tristate-play" % "0.1.0"
 ```
 
-For Scalaz typeclass instances (`Functor`, `Monad`, etc.), also add (Scala 2.10.x and Scala.2.11.x):
+For Scalaz typeclass instances (`Functor`, `Monad`, etc.), also add:
 ```scala
 libraryDependencies += "org.davidbild" %% "tristate-scalaz" % "0.1.0"
 ```
 
-For Cats typeclass instances (`Functor`, `Monad`, etc.), also add (Scala 2.10.x and Scala 2.11.x):
+For Cats typeclass instances (`Functor`, `Monad`, etc.), also add:
 ```scala
 libraryDependencies += "org.davidbild" %% "tristate-cats" % "0.1.0"
 ```

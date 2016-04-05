@@ -20,7 +20,7 @@ package org.davidbild.tristate
  * An optional value.
  *
  * A `Tristate[A]` will either be a wrapped `A` instance (`Present[A]`), an explicit lack of an underlying
- * `A` instance (`Absent`), or an implicit lack of an underlying `A` instance (`Unspecific`).
+ * `A` instance (`Absent`), or an implicit lack of an underlying `A` instance (`Unspecified`).
  */
 sealed abstract class Tristate[+A] extends Product with Serializable {
 

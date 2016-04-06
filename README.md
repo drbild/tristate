@@ -3,13 +3,13 @@
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11)
 [![Scaladoc](http://javadoc-badge.appspot.com/org.davidbild/tristate-core_2.11.svg?label=scaladoc)](http://javadoc-badge.appspot.com/org.davidbild/tristate-core_2.11)
 
-`Tristate[A]` is three-valued variant of `Option[A]` distinguishing between `Present[A](a: A)`, `Null`, and `Absent`.
+`Tristate[A]` is three-valued variant of `Option[A]` distinguishing between `Present[A](a: A)`, `Absent`, and `Unspecified`.
 
 
 
 | Name | Description | Scaladoc |
 |------|-------------|----------|
-|`tristate-core`|Main library|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate_2.11)|
+|`tristate-core`|Main library|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11)|
 |`tristate-play`|Play JSON `Reads/Writes`|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-play_2.11/)|
 |`tristate-scalaz`|Scalaz Typeclasses|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-scalaz_2.11/)|
 |`tristate-cats`|Cats Typeclasses|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-cats_2.11/)|

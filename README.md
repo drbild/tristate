@@ -67,7 +67,7 @@ Please submit bugs, questions, suggestions, or (ideally) contributions
 as issues and pull requests on Github.
 
 ### Maintainers
-**David R. Bild** [https://www.davidbild.org](https:www.davidbild.org)
+**David R. Bild** [https://www.davidbild.org](https://www.davidbild.org)
 
 
 ## License

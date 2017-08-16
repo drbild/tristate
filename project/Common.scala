@@ -1,9 +1,6 @@
 import sbt._
 import Keys._
 
-import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport._
-import de.heikoseeberger.sbtheader.license.Apache2_0
-
 import Dependencies.{Libs, V}
 
 object Common {
@@ -51,7 +48,9 @@ object Common {
     credentials    ++= credentialsVal,
 
     // keep headers updated
-    headers         := headersVal,
+    organizationName := "David R. Bild",
+    startYear        := Some(2016),
+    licenses         += ("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
 
     // sbt console prompt
     shellPrompt     := projectPrompt
@@ -100,9 +99,6 @@ object Common {
     cred.toList
   }
 
-  val headersVal = Map(
-    "scala" -> Apache2_0("2016", "David R. Bild", "*")
-  )
 }
 
 object TristateProject {

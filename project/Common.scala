@@ -15,6 +15,7 @@ object Common {
 
   val commonSettings: Seq[Setting[_]] = Seq(
     scalaVersion := V.scala,
+    crossScalaVersions := Seq(V.scala_2_11, V.scala_2_12),
 
     scalacOptions ++=  Seq(
       "-deprecation",

@@ -22,7 +22,8 @@ lazy val core = (
 lazy val play = (
   TristateProject("tristate-play")
     settings(
-      name                := "tristate-play",
+      name                 := "tristate-play",
+      crossScalaVersions   := Seq(V.scala_2_11),
       libraryDependencies ++= Seq(
         Libs.playJson,
         Libs.specs2

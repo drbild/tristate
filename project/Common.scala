@@ -33,9 +33,6 @@ object Common {
       "-Ywarn-numeric-widen",
       "-Ywarn-unused-import"),
 
-    javacOptions in (Compile) ++= Seq("-source", "1.8"),
-    javacOptions in (Compile, compile) ++= Seq("-target", "1.7"),
-
     updateOptions := updateOptions.value.withCachedResolution(true),
     resolvers     ++= Dependencies.resolvers,
 

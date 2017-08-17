@@ -14,8 +14,8 @@ object Common {
   }
 
   val commonSettings: Seq[Setting[_]] = Seq(
-    scalaVersion := V.scala,
-    crossScalaVersions := Seq(V.scala_2_11, V.scala_2_12),
+    scalaVersion := "2.11.11",
+    crossScalaVersions := Seq("2.11.11", "2.12.3"),
 
     scalacOptions ++=  Seq(
       "-deprecation",
@@ -40,7 +40,9 @@ object Common {
     updateOptions := updateOptions.value.withCachedResolution(true),
     resolvers     ++= Dependencies.resolvers,
 
-    libraryDependencies ++= Seq(Libs.scalaCheck),
+    libraryDependencies ++= Libs.at(scalaVersion.value)(
+      Libs.scalaCheck
+    ),
 
     // Release options
     organization    := "org.davidbild",

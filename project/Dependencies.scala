@@ -8,13 +8,16 @@ object Dependencies {
 
   // Versions
   object V {
-    val scala       = "2.11.11"
-    val scalaz      = "7.1.5"
-    val cats        = "0.4.1"
+    val scala_2_11  = "2.11.11"
+    val scala_2_12  = "2.12.3"
+    val scala       = scala_2_11
+
+    val scalaz      = "7.2.15"
+    val cats        = "1.0.0-MF"
     val play        = "2.4.6"
 
-    val scalaCheck  = "1.11.4"
-    val specs2      = "3.7.2"
+    val scalaCheck  = "1.12.6"
+    val specs2      = "3.9.4"
   }
 
   // Libraries

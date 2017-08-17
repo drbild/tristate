@@ -45,6 +45,7 @@ object Common {
     ),
 
     // Release options
+    publishTo       := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging),
     organization    := "org.davidbild",
     pomExtra        := pomExtraVal,
     pomPostProcess  := pomPostProcessVal,

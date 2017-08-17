@@ -16,7 +16,6 @@ object Common {
   val commonSettings: Seq[Setting[_]] = Seq(
     scalaVersion := V.scala,
 
-    scalacOptions ++= Seq("-target:jvm-1.7"),
     scalacOptions ++=  Seq(
       "-deprecation",
       "-encoding", "UTF-8",
@@ -32,6 +31,10 @@ object Common {
       "-Ywarn-dead-code",
       "-Ywarn-numeric-widen",
       "-Ywarn-unused-import"),
+    scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 11)) => Seq("-target:jvm-1.7")
+      case _             => Nil
+    }),
 
     updateOptions := updateOptions.value.withCachedResolution(true),
     resolvers     ++= Dependencies.resolvers,

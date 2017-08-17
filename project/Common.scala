@@ -47,39 +47,20 @@ object Common {
     // Release options
     publishTo       := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging),
     organization    := "org.davidbild",
-    pomExtra        := pomExtraVal,
     pomPostProcess  := pomPostProcessVal,
     credentials    ++= credentialsVal,
+
+    licenses         += ("Apache-2.0", url("https://www.apache.org/licenses/LICENSE-2.0.txt")),
+    homepage         := Some(url("https://github.com/drbild/tristate")),
+    scmInfo          := Some(ScmInfo(url("https://github.com/drbild/tristate.git"), "scm:git:git@github.com:drbild/tristate.git")),
+    developers       := List(Developer(id="drbild", name="David R. Bild", email="david@davidbild.org", url=url("https://github.com/drbild"))),
 
     // keep headers updated
     organizationName := "David R. Bild",
     startYear        := Some(2016),
-    licenses         += ("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
 
     // sbt console prompt
     shellPrompt     := projectPrompt
-  )
-
-  val pomExtraVal: xml.NodeBuffer = (
-    <url>https://github.com/drbild/tristate</url>
-      <licenses>
-        <license>
-          <name>Apache</name>
-          <url>http://www.opensource.org/licenses/Apache-2.0</url>
-          <distribution>repo</distribution>
-        </license>
-      </licenses>
-    <scm>
-      <url>git@github.com:drbild/tristate.git</url>
-      <connection>scm:git:git@github.com:drbild/tristate.git</connection>
-    </scm>
-    <developers>
-      <developer>
-        <id>drbild</id>
-        <name>David R. Bild</name>
-        <url>https://github.com/drbild</url>
-      </developer>
-    </developers>
   )
 
   /* strip test deps from pom */

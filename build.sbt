@@ -15,17 +15,17 @@ lazy val core = (
   TristateProject("tristate-core")
     settings(
       name                 :=  "tristate-core",
-      libraryDependencies ++= Seq()
+      libraryDependencies ++= Libs.at(scalaVersion.value)()
     )
 )
 
 lazy val play = (
   TristateProject("tristate-play")
     settings(
-      name                := "tristate-play",
-      libraryDependencies ++= Seq(
+      name                 := "tristate-play",
+      libraryDependencies ++= Libs.at(scalaVersion.value)(
         Libs.playJson,
-        Libs.specs2
+        Libs.specs2,
       )
     )
     dependsOn(core % "compile->compile;test->test")
@@ -35,7 +35,7 @@ lazy val scalaz = (
   TristateProject("tristate-scalaz")
     settings(
       name                :=  "tristate-scalaz",
-      libraryDependencies ++= Seq(
+      libraryDependencies ++= Libs.at(scalaVersion.value)(
         Libs.scalaz,
         Libs.scalazScalaCheck
       )

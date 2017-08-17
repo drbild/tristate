@@ -1,18 +1,11 @@
 package org.davidbild.tristate
 
 import org.scalacheck._
-import org.scalacheck.Gen.Parameters
-import org.scalacheck.Prop.Result
 
 import scala.reflect.ClassTag
 
-
 class SpecLite extends Properties("") {
-  def updateName(): Unit = {
-    val f = classOf[Properties].getDeclaredField("name")
-    f.setAccessible(true)
-    f.set(this, getClass.getName.stripSuffix("$"))
-  }
+  override val name = this.getClass.getName.stripSuffix("$")
 
   def checkAll(name: String, props: Properties): Unit = {
     for ((name2, prop) <- props.properties) yield {
@@ -27,13 +20,16 @@ class SpecLite extends Properties("") {
   }
 
   class PropertyOps(props: Properties) {
-    def withProp(propName: String, prop: Prop) = new Properties(props.name) {
-      for {(name, p) <- props.properties} property(name) = p
-      property(propName) = prop
+    def withProp(propName: String, prop: Prop): Properties = {
+      val p = new Properties(props.name)
+      for {(name, x) <- props.properties} property(name) = x
+      p.property(propName) = prop
+      p
     }
   }
 
   implicit def enrichProperties(props: Properties) = new PropertyOps(props)
+
   private var context: String = ""
 
   class StringOps(s: String) {
@@ -41,10 +37,10 @@ class SpecLite extends Properties("") {
       val saved = context
       context = s; try a finally context = saved
     }
+
     def ![A](a: => A)(implicit ev: (A) => Prop): Unit = in(a)
-    def in[A](a: => A)(implicit ev: (A) => Prop): Unit = property(context + ":" + s) = new Prop {
-      def apply(prms: Parameters): Result = ev(a).apply(prms)
-    }
+
+    def in[A](a: => A)(implicit ev: (A) => Prop): Unit = property(context + ":" + s) = Prop(ev(a)(_))
   }
 
   implicit def enrichString(s: String) = new StringOps(s)
@@ -54,6 +50,7 @@ class SpecLite extends Properties("") {
   }
 
   def fail(msg: String): Nothing = throw new AssertionError(msg)
+
   class AnyOps[A](actual: => A) {
     def must_==(expected: A): Unit = {
       val act = actual

@@ -54,10 +54,10 @@ object UpdateReadmePlugin extends AutoPlugin {
       val relative = IO.relativize(base, file).getOrElse(sys.error(s"[${file}] is outside of the repository."))
       val message  = readmeCommitMessage.value
 
-      vcs.add(relative) !! log
-      val status = (vcs.status.!!).trim
+      vcs.add(relative).!
+      val status = vcs.status.!!.trim
       if (status.nonEmpty) {
-        vcs.commit(message) ! log
+        vcs.commit(message, false).!
       }
     }
   )

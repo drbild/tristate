@@ -1,9 +1,6 @@
 import sbt._
 import Keys._
 
-import de.heikoseeberger.sbtheader.HeaderPlugin.autoImport._
-import de.heikoseeberger.sbtheader.license.Apache2_0
-
 import Dependencies.{Libs, V}
 
 object Common {
@@ -17,9 +14,9 @@ object Common {
   }
 
   val commonSettings: Seq[Setting[_]] = Seq(
-    scalaVersion := V.scala,
+    scalaVersion := "2.11.11",
+    crossScalaVersions := Seq("2.11.11", "2.12.3"),
 
-    scalacOptions ++= Seq("-target:jvm-1.7"),
     scalacOptions ++=  Seq(
       "-deprecation",
       "-encoding", "UTF-8",
@@ -35,14 +32,17 @@ object Common {
       "-Ywarn-dead-code",
       "-Ywarn-numeric-widen",
       "-Ywarn-unused-import"),
-
-    javacOptions in (Compile) ++= Seq("-source", "1.8"),
-    javacOptions in (Compile, compile) ++= Seq("-target", "1.7"),
+    scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, 11)) => Seq("-target:jvm-1.7")
+      case _             => Nil
+    }),
 
     updateOptions := updateOptions.value.withCachedResolution(true),
     resolvers     ++= Dependencies.resolvers,
 
-    libraryDependencies ++= Seq(Libs.scalaCheck),
+    libraryDependencies ++= Libs.at(scalaVersion.value)(
+      Libs.scalaCheck
+    ),
 
     // Release options
     organization    := "org.davidbild",
@@ -51,7 +51,9 @@ object Common {
     credentials    ++= credentialsVal,
 
     // keep headers updated
-    headers         := headersVal,
+    organizationName := "David R. Bild",
+    startYear        := Some(2016),
+    licenses         += ("Apache-2.0", new URL("https://www.apache.org/licenses/LICENSE-2.0.txt")),
 
     // sbt console prompt
     shellPrompt     := projectPrompt
@@ -100,9 +102,6 @@ object Common {
     cred.toList
   }
 
-  val headersVal = Map(
-    "scala" -> Apache2_0("2016", "David R. Bild", "*")
-  )
 }
 
 object TristateProject {

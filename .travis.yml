@@ -1,0 +1,38 @@
+language: scala
+
+sudo: false
+
+scala:
+  - "2.11.11"
+  - "2.12.3"
+
+jdk:
+  - oraclejdk8
+  - oraclejdk7
+
+env:
+  matrix:
+    - PROJECT=tristate-core
+    - PROJECT=tristate-play
+    - PROJECT=tristate-scalaz
+
+matrix:
+  exclude:
+    - scala: 2.12.3
+      jdk: oraclejdk7
+
+script:
+  - sbt ++${TRAVIS_SCALA_VERSION} $PROJECT/test
+
+cache:
+  directories:
+    - $HOME/.ivy2/cache
+    - $HOME/.sbt/boot/scala*
+    - $HOME/.sbt/launchers
+
+before_cache:
+  - du -h -d 1 $HOME/.ivy2/cache
+  - du -h -d 2 $HOME/.sbt/
+  - find $HOME/.ivy2/cache -name "ivydata-*.properties" -type f -delete
+  - find $HOME/.ivy2/cache -name "*SNAPSHOT" -type f -delete
+  - find $HOME/.sbt -name "*.lock" -type f -delete

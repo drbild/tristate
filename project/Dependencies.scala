@@ -10,7 +10,8 @@ object Dependencies {
   object V {
     val scalaz     = (sv: String) => "7.2.15"
     val cats       = (sv: String) => "1.0.0-MF"
-    val play       = (sv: String) => "2.5.16"
+    val play       = (sv: String) => Map("2.11" -> "2.5.16",
+                                         "2.12" -> "2.6.3")(key(sv))
 
     val scalaCheck = (sv: String) => "1.12.6"
     val specs2     = (sv: String) => "3.9.4"

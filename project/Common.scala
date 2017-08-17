@@ -36,6 +36,7 @@ object Common {
       case Some((2, 11)) => Seq("-target:jvm-1.7")
       case _             => Nil
     }),
+    scalacOptions in (Compile, doc) := (scalacOptions in (Compile, doc)).value.filter(_ != "-Xfatal-warnings"),
 
     updateOptions := updateOptions.value.withCachedResolution(true),
     resolvers     ++= Dependencies.resolvers,
@@ -43,6 +44,8 @@ object Common {
     libraryDependencies ++= Libs.at(scalaVersion.value)(
       Libs.scalaCheck
     ),
+
+    autoAPIMappings := true,
 
     // Release options
     publishTo       := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging),

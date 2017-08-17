@@ -52,6 +52,12 @@ object TristateTests extends SpecLite {
     propBoolean(x.toOption == None)
   }
 
+  "present to list is non-empty" ! forAll { x: Int => present(x).toList == List(x) }
+
+  "absent or unspecified to list is empty" ! forAll { x: Tristate[Int] => !x.isPresent ==>
+    propBoolean(x.toList == Nil)
+  }
+
   "present orElse is present" ! forAll { (x: Int, t: Tristate[Int]) => present(x).orElse(t).isPresent }
 
 }

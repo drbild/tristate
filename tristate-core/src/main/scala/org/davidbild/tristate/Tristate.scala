@@ -61,6 +61,9 @@ sealed abstract class Tristate[+A] extends Product with Serializable {
   final def toOption: Option[A] =
     cata(Some(_), None, None)
 
+  final def toList: List[A] =
+    cata(List(_), Nil, Nil)
+
   final def orElse[B >: A](tsa: Tristate[B]): Tristate[B] =
     cata(_ => this, tsa, tsa)
 

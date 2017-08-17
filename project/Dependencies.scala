@@ -14,7 +14,7 @@ object Dependencies {
 
     val scalaz      = "7.2.15"
     val cats        = "1.0.0-MF"
-    val play        = "2.4.6"
+    val play        = "2.5.16"
 
     val scalaCheck  = "1.12.6"
     val specs2      = "3.9.4"

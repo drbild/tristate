@@ -1,7 +1,7 @@
 # tristate
 [![Build Status](https://travis-ci.org/drbild/tristate.svg?branch=master)](https://travis-ci.org/drbild/tristate)
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11)
-[![Scaladoc](http://javadoc-badge.appspot.com/org.davidbild/tristate-core_2.11.svg?label=scaladoc)](http://javadoc-badge.appspot.com/org.davidbild/tristate-core_2.11)
+[![Scaladoc](https://www.javadoc.io/badge/org.davidbild/tristate-core_2.12.svg?color=blue&label=Scaladoc)](https://www.javadoc.io/doc/org.davidbild/tristate-core_2.12)
 
 `Tristate[A]` is three-valued variant of `Option[A]` distinguishing between `Present[A](a: A)`, `Absent`, and `Unspecified`.
 
@@ -9,10 +9,10 @@
 
 | Name | Description | Scaladoc |
 |------|-------------|----------|
-|`tristate-core`|Main library|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11)|
-|`tristate-play`|Play JSON `Reads/Writes`|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-play_2.11/)|
-|`tristate-scalaz`|Scalaz Typeclasses|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-scalaz_2.11/)|
-|`tristate-cats`|Cats Typeclasses|[API](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-cats_2.11/)|
+|`tristate-core`|Main library|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-core_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-core_2.12)|
+|`tristate-play`|Play JSON `Reads/Writes`|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-play_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-play_2.12)|
+|`tristate-cats`|Cats Typeclasses|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-cats_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-cats_2.12)|
+|`tristate-scalaz`|Scalaz Typeclasses|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-scalaz_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-scalaz_2.12)|
 
 ## Installation
 

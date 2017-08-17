@@ -48,8 +48,8 @@ object UpdateReadmePlugin extends AutoPlugin {
       val log  = streams.value.log
       val vcs  = releaseVcs.value.getOrElse(sys.error("Aborting. CWD is not a supported repository."))
 
-      val file = readmeFile.value
-      val base = vcs.baseDir
+      val file = readmeFile.value.getAbsoluteFile
+      val base = vcs.baseDir.getAbsoluteFile
 
       val relative = IO.relativize(base, file).getOrElse(sys.error(s"[${file}] is outside of the repository."))
       val message  = readmeCommitMessage.value

@@ -19,23 +19,23 @@
 Add the following to your sbt build:
 
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-core" % "0.3.0"
+libraryDependencies += "org.davidbild" %% "tristate-core" % "0.3.1"
 ```
 
 To support de/serialization using Play JSON, also add:
 
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-play" % "0.3.0"
+libraryDependencies += "org.davidbild" %% "tristate-play" % "0.3.1"
 ```
 
 For Scalaz typeclass instances (`Functor`, `Monad`, etc.), also add:
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-scalaz" % "0.3.0"
+libraryDependencies += "org.davidbild" %% "tristate-scalaz" % "0.3.1"
 ```
 
 For Cats typeclass instances (`Functor`, `Monad`, etc.), also add:
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-cats" % "0.1.0"
+libraryDependencies += "org.davidbild" %% "tristate-cats" % "0.3.1"
 ```
 
 

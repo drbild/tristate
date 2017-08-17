@@ -14,6 +14,7 @@ object Dependencies {
                                          "2.12" -> "2.6.3")(key(sv))
 
     val scalaCheck = (sv: String) => "1.12.6"
+    val scalaTest  = (sv: String) => "3.0.3"
     val specs2     = (sv: String) => "3.9.4"
 
     def key(sv: String) =
@@ -29,10 +30,13 @@ object Dependencies {
     val scalaz           = (sv: String) => "org.scalaz"               %% "scalaz-core"               % V.scalaz(sv)
     val scalazScalaCheck = (sv: String) => "org.scalaz"               %% "scalaz-scalacheck-binding" % V.scalaz(sv)     % "test"
 
-    val cats             = (sv: String) => "org.typelevel"            %% "cats"                      % V.cats(sv)
+    val cats             = (sv: String) => "org.typelevel"            %% "cats-core"                 % V.cats(sv)
+    val catsLaws         = (sv: String) => "org.typelevel"            %% "cats-laws"                 % V.cats(sv)       % "test"
+
     val playJson         = (sv: String) => "com.typesafe.play"        %% "play-json"                 % V.play(sv)
 
     val scalaCheck       = (sv: String) => "org.scalacheck"           %% "scalacheck"                % V.scalaCheck(sv) % "test"
+    val scalaTest        = (sv: String) => "org.scalatest"            %% "scalatest"                 % V.scalaTest(sv)  % "test"
     val specs2           = (sv: String)  => "org.specs2"              %% "specs2-core"               % V.specs2(sv)     % "test"
 
     def at(sv: String)(libs: String => ModuleID*) =

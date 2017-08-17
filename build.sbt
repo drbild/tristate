@@ -7,8 +7,8 @@ lazy val tristate = (
     settings(
       packagedArtifacts := Map.empty // don't publish the default aggregate root project
     )
-    aggregate(core, play, scalaz)
-    dependsOn(core, play, scalaz)
+    aggregate(core, play, cats, scalaz)
+    dependsOn(core, play, cats, scalaz)
 )
 
 lazy val core = (
@@ -26,6 +26,19 @@ lazy val play = (
       libraryDependencies ++= Libs.at(scalaVersion.value)(
         Libs.playJson,
         Libs.specs2,
+      )
+    )
+    dependsOn(core % "compile->compile;test->test")
+)
+
+lazy val cats = (
+  TristateProject("tristate-cats")
+    settings(
+      name                :=  "tristate-cats",
+      libraryDependencies ++= Libs.at(scalaVersion.value)(
+        Libs.cats,
+        Libs.catsLaws,
+        Libs.scalaTest
       )
     )
     dependsOn(core % "compile->compile;test->test")

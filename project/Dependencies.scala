@@ -8,7 +8,7 @@ object Dependencies {
 
   // Versions
   object V {
-    val scala       = "2.11.7"
+    val scala       = "2.11.11"
     val scalaz      = "7.1.5"
     val cats        = "0.4.1"
     val play        = "2.4.6"

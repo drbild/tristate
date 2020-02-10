@@ -23,6 +23,12 @@ object TristateTests extends SpecLite {
     ))
   }
 
+  private implicit val arbTristateCobindInt: Arbitrary[Tristate[Int] => Int] =
+    Arbitrary((x: Tristate[Int]) => x match {
+      case Present(x) => x
+      case _ => 0
+    })
+
   checkAll("Tristate", order.laws[Tristate[String]])
   checkAll("Tristate", equal.laws[Tristate[String]])
   checkAll("Tristate", monoid.laws[Tristate[String]])

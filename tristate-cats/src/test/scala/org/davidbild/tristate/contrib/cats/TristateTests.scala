@@ -2,31 +2,30 @@ package org.davidbild.tristate.contrib.cats
 
 import cats.implicits._
 import cats.laws.discipline._
-import cats.kernel.laws.OrderLaws
+import cats.kernel.laws.discipline.{PartialOrderTests, OrderTests}
 
 import org.scalacheck.{Arbitrary, Cogen, Gen}
-import org.scalatest.{FunSuite, Matchers}
-import org.scalatest.prop._
-import org.typelevel.discipline.scalatest.Discipline
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.funsuite.AnyFunSuite
+import org.scalatestplus.scalacheck._
+import org.typelevel.discipline.scalatest.FunSuiteDiscipline
 
 import org.scalacheck.rng.Seed
 
 import org.davidbild.tristate._
 import org.davidbild.tristate.Tristate._
 
-class TristateTests extends FunSuite with  Matchers with PropertyChecks with Discipline {
+class TristateTests extends AnyFunSuite with Matchers with ScalaCheckPropertyChecks with FunSuiteDiscipline {
 
-  checkAll("Tristate[Int]", CartesianTests[Tristate].cartesian[Int, Int, Int])
+  checkAll("Tristate[Int]", FunctorTests[Tristate].functor[Int, Int, Int])
   checkAll("Tristate[Int] with Option", TraverseTests[Tristate].traverse[Int, Int, Int, Int, Tristate, Option])
-  checkAll("Tristate with Unit", MonadErrorTests[Tristate, Unit].monadError[Int, Int, Int])
+  checkAll("Tristate with Unit", ApplicativeErrorTests[Tristate, Unit].applicativeError[Int, Int, Int])
   checkAll("Tristate[Int]", ApplicativeTests[Tristate].applicative[Int, Int, Int])
   checkAll("Tristate[Int]", MonadTests[Tristate].monad[Int, Int, Int])
   checkAll("Tristate[Int]", MonoidKTests[Tristate].monoidK[Int])
   checkAll("Tristate[Int]", CoflatMapTests[Tristate].coflatMap[Int, Int, Int])
-
-  val orderLaws = OrderLaws[Tristate[Int]]
-  checkAll("Tristate[Int]", orderLaws.partialOrder)
-  checkAll("Tristate[Int]", orderLaws.order)
+  checkAll("Tristate[Int]", PartialOrderTests[Tristate[Int]].partialOrder)
+  checkAll("Tristate[Int]", OrderTests[Tristate[Int]].order)
 
   test("show") {
     absent[String].show should === ("Absent")

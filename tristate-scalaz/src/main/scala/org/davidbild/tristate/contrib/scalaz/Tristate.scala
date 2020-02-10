@@ -74,7 +74,7 @@ trait TristateInstances extends TristateInstances0 {
     def cobind[A, B](fa: Tristate[A])(f: (Tristate[A]) => B): Tristate[B] = fa cobind f
 
     override def pextract[B, A](fa: Tristate[A]): \/[Tristate[B], A] =
-      fa map \/.right getOrElse -\/(Unspecified)
+     foldLeft[A, \/[Tristate[B], A]](fa, -\/(Unspecified))((_, x) => \/-(x))
 
     override def isDefined[A](fa: Tristate[A]): Boolean = fa.isPresent
     override def toOption[A](fa: Tristate[A]): Option[A] = fa.toOption
@@ -103,9 +103,9 @@ trait TristateInstances extends TristateInstances0 {
 
   implicit def TristateShow[A: Show]: Show[Tristate[A]] = new Show[Tristate[A]] {
     override def show(o1: Tristate[A]) = o1 match {
-      case Present(a1) => Cord("Present(", Show[A].show(a1), ")")
-      case Absent      => "Absent"
-      case Unspecified => "Unspecified"
+      case Present(a1) => Cord("Present(") ++ Show[A].show(a1) ++ Cord(")")
+      case Absent      => Cord("Absent")
+      case Unspecified => Cord("Unspecified")
     }
   }
 

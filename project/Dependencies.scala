@@ -3,7 +3,7 @@ import Keys._
 
 object Dependencies {
   val resolvers = Seq(
-    "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/"
+    "Typesafe repository" at "https://repo.typesafe.com/typesafe/releases/"
   )
 
   // Versions

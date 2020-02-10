@@ -30,9 +30,8 @@ object Common {
       "-Ywarn-dead-code",
       "-Ywarn-numeric-widen"),
     scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 11)) => Seq("-target:jvm-1.7", "-Ywarn-unused-import", "-Xfuture")
-      case Some((2, 12)) => Seq("-Ywarn-unused-import", "-Xfuture")
-      case _             => Seq("-Wunused:imports")
+      case Some((2, 11)) | Some((2, 12))=> Seq("-Ywarn-unused-import", "-Xfuture")
+      case _                            => Seq("-Wunused:imports")
     }),
     scalacOptions in (Compile, doc) := (scalacOptions in (Compile, doc)).value.filter(_ != "-Xfatal-warnings"),
 

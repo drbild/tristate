@@ -11,20 +11,13 @@ scala:
 
 jdk:
   - oraclejdk8
-  - openjdk7
 
 env:
   matrix:
     - PROJECT=tristate-core
     - PROJECT=tristate-play
     - PROJECT=tristate-scalaz
-
-matrix:
-  exclude:
-    - scala: 2.12.3
-      jdk: openjdk7
-    - scala: 2.13.1
-      jdk: openjdk7
+    - PROJECT=tristate-cats
 
 script:
   - sbt ++${TRAVIS_SCALA_VERSION} $PROJECT/test

@@ -1,7 +1,7 @@
 # tristate
 [![Build Status](https://travis-ci.org/drbild/tristate.svg?branch=master)](https://travis-ci.org/drbild/tristate)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.11)
-[![Scaladoc](https://www.javadoc.io/badge/org.davidbild/tristate-core_2.12.svg?color=blue&label=Scaladoc)](https://www.javadoc.io/doc/org.davidbild/tristate-core_2.12)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/org.davidbild/tristate-core_2.13)
+[![Scaladoc](https://www.javadoc.io/badge/org.davidbild/tristate-core_2.13.svg?color=blue&label=Scaladoc)](https://www.javadoc.io/doc/org.davidbild/tristate-core_2.12)
 
 `Tristate[A]` is three-valued variant of `Option[A]` distinguishing between `Present[A](a: A)`, `Absent`, and `Unspecified`.
 
@@ -9,33 +9,33 @@
 
 | Name | Description | Scaladoc |
 |------|-------------|----------|
-|`tristate-core`|Main library|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-core_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-core_2.12)|
-|`tristate-play`|Play JSON `Reads/Writes`|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-play_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-play_2.12)|
-|`tristate-cats`|Cats Typeclasses|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-cats_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-cats_2.12)|
-|`tristate-scalaz`|Scalaz Typeclasses|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-scalaz_2.12.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-scalaz_2.12)|
+|`tristate-core`|Main library|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-core_2.13.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-core_2.13)|
+|`tristate-play`|Play JSON `Reads/Writes`|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-play_2.13.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-play_2.13)|
+|`tristate-cats`|Cats Typeclasses|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-cats_2.13.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-cats_2.13)|
+|`tristate-scalaz`|Scalaz Typeclasses|[![API](https://www.javadoc.io/badge/org.davidbild/tristate-scalaz_2.13.svg?color=blue&label=API)](https://www.javadoc.io/doc/org.davidbild/tristate-scalaz_2.13)|
 
 ## Installation
 
 Add the following to your sbt build:
 
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-core" % "0.3.1"
+libraryDependencies += "org.davidbild" %% "tristate-core" % "0.4.0"
 ```
 
 To support de/serialization using Play JSON, also add:
 
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-play" % "0.3.1"
+libraryDependencies += "org.davidbild" %% "tristate-play" % "0.4.0"
 ```
 
 For Scalaz typeclass instances (`Functor`, `Monad`, etc.), also add:
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-scalaz" % "0.3.1"
+libraryDependencies += "org.davidbild" %% "tristate-scalaz" % "0.4.0"
 ```
 
 For Cats typeclass instances (`Functor`, `Monad`, etc.), also add:
 ```scala
-libraryDependencies += "org.davidbild" %% "tristate-cats" % "0.3.1"
+libraryDependencies += "org.davidbild" %% "tristate-cats" % "0.4.0"
 ```
 
 
@@ -59,7 +59,7 @@ import org.davidbild.tristate.contrib.cats._
 
 ## Documents
 
- - [scaladoc (latest stable release)](http://javadoc-badge.appspot.com/org.davidbild/tristate-core_2.11)
+ - [scaladoc (latest stable release)](http://javadoc-badge.appspot.com/org.davidbild/tristate-core_2.13)
 
 ## Contributing
 

@@ -1,3 +1,5 @@
+dist: trusty
+
 language: scala
 
 sudo: false
@@ -5,21 +7,17 @@ sudo: false
 scala:
   - "2.11.11"
   - "2.12.3"
+  - "2.13.1"
 
 jdk:
   - oraclejdk8
-  - oraclejdk7
 
 env:
   matrix:
     - PROJECT=tristate-core
     - PROJECT=tristate-play
     - PROJECT=tristate-scalaz
-
-matrix:
-  exclude:
-    - scala: 2.12.3
-      jdk: oraclejdk7
+    - PROJECT=tristate-cats
 
 script:
   - sbt ++${TRAVIS_SCALA_VERSION} $PROJECT/test

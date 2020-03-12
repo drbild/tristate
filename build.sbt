@@ -25,7 +25,7 @@ lazy val play = (
       name                 := "tristate-play",
       libraryDependencies ++= Libs.at(scalaVersion.value)(
         Libs.playJson,
-        Libs.specs2,
+        Libs.specs2
       )
     )
     dependsOn(core % "compile->compile;test->test")
@@ -38,7 +38,8 @@ lazy val cats = (
       libraryDependencies ++= Libs.at(scalaVersion.value)(
         Libs.cats,
         Libs.catsLaws,
-        Libs.scalaTest
+        Libs.scalaTest,
+        Libs.disciplineScalaTest
       )
     )
     dependsOn(core % "compile->compile;test->test")

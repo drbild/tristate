@@ -26,8 +26,8 @@ import scala.annotation.tailrec
 
 trait TristateInstances extends TristateInstances2 {
 
-  implicit val tristateCatsInstancesForTristate: Traverse[Tristate] with MonadError[Tristate, Unit] with Monad[Tristate] with CoflatMap[Tristate] with MonoidK[Tristate] =
-    new Traverse[Tristate] with MonadError[Tristate, Unit] with Monad[Tristate] with CoflatMap[Tristate] with MonoidK[Tristate] {
+  implicit val tristateCatsInstancesForTristate: Traverse[Tristate] with CommutativeApplicative[Tristate] with ApplicativeError[Tristate, Unit] with Monad[Tristate] with CoflatMap[Tristate] with MonoidK[Tristate] =
+    new Traverse[Tristate] with CommutativeApplicative[Tristate] with ApplicativeError[Tristate, Unit] with Monad[Tristate] with CoflatMap[Tristate] with MonoidK[Tristate] {
 
       def empty[A]: Tristate[A] = Absent
 

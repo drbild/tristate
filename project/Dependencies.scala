@@ -8,22 +8,17 @@ object Dependencies {
 
   // Versions
   object V {
-    val scalaz     = (sv: String) => "7.2.30"
-    val cats       = (sv: String) => "2.0.0"
-    val play       = (sv: String) => Map("2.11" -> "2.5.16",
-                                         "2.12" -> "2.6.3",
-                                         "2.13" -> "2.8.1")(key(sv))
+    val scalaz     = (sv: String) => "7.3.8"
+    val cats       = (sv: String) => "2.10.0"
+    val play       = (sv: String) => "3.0.1"
+    val playJson = (sv: String) => "2.10.3"
 
-    val scalaCheck          =    (sv: String) => Map("2.11" -> "1.13.4",
-                                                  "2.12" -> "1.14.1",
-                                                  "2.13" -> "1.14.1")(key(sv))
-    val scalaTest           =    (sv: String) => Map("2.11" -> "3.0.3",
-                                                    "2.12" -> "3.0.8",
-                                                    "2.13" -> "3.0.8")(key(sv))
-    val specs2              =    (sv: String) => "4.8.3"
-    val scalazScalaCheck    =    (sv: String) => "7.3.0-M32"
+    val scalaCheck          =    (sv: String) => "1.17.0"
+    val scalaTest           =    (sv: String) => "3.2.17"
+    val specs2              =    (sv: String) => "5.4.2"
+    val scalazScalaCheck    =    (sv: String) => "7.3.8"
 
-    val disciplineScalaTest =    (vs: String) => "1.0.0"
+    val disciplineScalaTest =    (vs: String) => "2.2.0"
 
     def key(sv: String) =
       CrossVersion.partialVersion(sv) match {
@@ -42,7 +37,7 @@ object Dependencies {
     val catsLaws            =  (sv: String) => "org.typelevel"      %% "cats-laws"                 % V.cats(sv)                % "test"
     val disciplineScalaTest =  (sv: String) => "org.typelevel"      %% "discipline-scalatest"      % V.disciplineScalaTest(sv) % "test"
 
-    val playJson            =  (sv: String) => "com.typesafe.play"  %% "play-json"                 % V.play(sv)
+    val playJson            =  (sv: String) => "com.typesafe.play"  %% "play-json"                 % V.playJson(sv)
 
     val scalaCheck          =  (sv: String) => "org.scalacheck"     %% "scalacheck"                % V.scalaCheck(sv)          % "test"
     val scalaTest           =  (sv: String) => "org.scalatest"      %% "scalatest"                 % V.scalaTest(sv)           % "test"

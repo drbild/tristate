@@ -14,8 +14,7 @@ object Common {
   }
 
   val commonSettings: Seq[Setting[_]] = Seq(
-    scalaVersion := "2.11.12",
-    crossScalaVersions := Seq("2.11.12", "2.12.3", "2.13.1"),
+    scalaVersion := "3.1.2",
 
     scalacOptions ++=  Seq(
       "-deprecation",
@@ -25,14 +24,7 @@ object Common {
       "-language:higherKinds",
       "-language:implicitConversions",
       "-unchecked",
-      "-Xfatal-warnings",
-      "-Xlint",
-      "-Ywarn-dead-code",
-      "-Ywarn-numeric-widen"),
-    scalacOptions ++= (CrossVersion.partialVersion(scalaVersion.value) match {
-      case Some((2, 11)) | Some((2, 12))=> Seq("-Ywarn-unused-import", "-Xfuture")
-      case _                            => Seq("-Wunused:imports")
-    }),
+      "-Xfatal-warnings"),
     scalacOptions in (Compile, doc) := (scalacOptions in (Compile, doc)).value.filter(_ != "-Xfatal-warnings"),
 
     updateOptions := updateOptions.value.withCachedResolution(true),

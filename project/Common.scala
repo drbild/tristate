@@ -25,7 +25,7 @@ object Common {
       "-language:implicitConversions",
       "-unchecked",
       "-Xfatal-warnings"),
-    scalacOptions in (Compile, doc) := (scalacOptions in (Compile, doc)).value.filter(_ != "-Xfatal-warnings"),
+    Compile / doc / scalacOptions := (Compile / doc / scalacOptions).value.filter(_ != "-Xfatal-warnings"),
 
     updateOptions := updateOptions.value.withCachedResolution(true),
     resolvers     ++= Dependencies.resolvers,
@@ -56,13 +56,13 @@ object Common {
   )
 
   /* strip test deps from pom */
-  import scala.xml._
-  import scala.xml.transform._
-  lazy val pomPostProcessVal = { node: Node =>
+  import scala.xml.*
+  import scala.xml.transform.*
+  lazy val pomPostProcessVal: Node => Node = { node: Node =>
     def stripIf(f: Node => Boolean) = new RewriteRule {
-      override def transform(n: Node) = if (f(n)) NodeSeq.Empty else n
+      override def transform(n: Node): NodeSeq = if (f(n)) NodeSeq.Empty else n
     }
-    val stripTestScope = stripIf(n => n.label == "dependency" && (n \ "scope").text == "test")
+    val stripTestScope: RewriteRule = stripIf(n => n.label == "dependency" && (n \ "scope").text == "test")
     new RuleTransformer(stripTestScope).transform(node)(0)
   }
 
@@ -79,8 +79,8 @@ object Common {
 }
 
 object TristateProject {
-  import Common._
+  import Common.*
 
   def apply(name: String): Project = TristateProject(name, file(name))
-  def apply(name: String, file: File): Project =  Project(name, file).settings(commonSettings:_*)
+  def apply(name: String, file: File): Project =  Project(name, file).settings(commonSettings *)
 }

@@ -11,7 +11,6 @@ object Dependencies {
     val scalaz     = (sv: String) => "7.3.8"
     val cats       = (sv: String) => "2.10.0"
     val play       = (sv: String) => "3.0.1"
-    val playJson = (sv: String) => "2.10.3"
 
     val scalaCheck          =    (sv: String) => "1.17.0"
     val scalaTest           =    (sv: String) => "3.2.17"
@@ -37,13 +36,13 @@ object Dependencies {
     val catsLaws            =  (sv: String) => "org.typelevel"      %% "cats-laws"                 % V.cats(sv)                % "test"
     val disciplineScalaTest =  (sv: String) => "org.typelevel"      %% "discipline-scalatest"      % V.disciplineScalaTest(sv) % "test"
 
-    val playJson            =  (sv: String) => "com.typesafe.play"  %% "play-json"                 % V.playJson(sv)
+    val playJson            =  (sv: String) => "org.playframework"  %% "play-json"                 % V.play(sv)
 
     val scalaCheck          =  (sv: String) => "org.scalacheck"     %% "scalacheck"                % V.scalaCheck(sv)          % "test"
     val scalaTest           =  (sv: String) => "org.scalatest"      %% "scalatest"                 % V.scalaTest(sv)           % "test"
     val specs2              =  (sv: String) => "org.specs2"         %% "specs2-core"               % V.specs2(sv)              % "test"
 
-    def at(sv: String)(libs: String => ModuleID*) =
+    def at(sv: String)(libs: String => ModuleID*): Seq[sbt.ModuleID] =
       libs map { _(sv) }
   }
 

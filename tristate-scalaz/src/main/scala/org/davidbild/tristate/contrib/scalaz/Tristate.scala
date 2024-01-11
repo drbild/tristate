@@ -29,7 +29,7 @@ sealed trait TristateInstances0 {
 }
 
 trait TristateInstances extends TristateInstances0 {
-  implicit val tristateInstance = new Traverse[Tristate] with MonadPlus[Tristate] with Foldable[Tristate] with Cozip[Tristate] with IsEmpty[Tristate] with Cobind[Tristate] with Optional[Tristate] {
+  implicit val tristateInstance: Traverse[Tristate] with MonadPlus[Tristate] with Foldable[Tristate] with Cozip[Tristate] with IsEmpty[Tristate] with Cobind[Tristate] with Optional[Tristate] = new Traverse[Tristate] with MonadPlus[Tristate] with Foldable[Tristate] with Cozip[Tristate] with IsEmpty[Tristate] with Cobind[Tristate] with Optional[Tristate] {
     def point[A](a: => A) = Present(a)
 
     override def ap[A, B](fa: => Tristate[A])(f: => Tristate[A => B]) = f match {

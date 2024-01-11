@@ -90,9 +90,9 @@ object Tristate {
 
   final case class Present[A](a: A) extends Tristate[A]
 
-  final case object Absent extends Tristate[Nothing]
+  case object Absent extends Tristate[Nothing]
 
-  final case object Unspecified extends Tristate[Nothing]
+  case object Unspecified extends Tristate[Nothing]
 
   final def present[A](a: A): Tristate[A] = Present(a)
 
@@ -101,6 +101,6 @@ object Tristate {
   final def unspecified[A]: Tristate[A] = Unspecified
 
   final def fromOption[A](oa: Option[A]): Tristate[A] =
-   oa.fold(absent[A])(present(_))
+   oa.fold(absent[A])(present)
 
 }

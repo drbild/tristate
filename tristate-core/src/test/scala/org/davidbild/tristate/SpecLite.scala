@@ -1,11 +1,12 @@
 package org.davidbild.tristate
 
-import org.scalacheck._
+import org.scalacheck.*
 
+import scala.annotation.targetName
 import scala.reflect.ClassTag
 
 class SpecLite extends Properties("") {
-  override val name = this.getClass.getName.stripSuffix("$")
+  override val name: String = this.getClass.getName.stripSuffix("$")
 
   def checkAll(name: String, props: Properties): Unit = {
     for ((name2, prop) <- props.properties) yield {
@@ -28,7 +29,7 @@ class SpecLite extends Properties("") {
     }
   }
 
-  implicit def enrichProperties(props: Properties) = new PropertyOps(props)
+  implicit def enrichProperties(props: Properties): PropertyOps = new PropertyOps(props)
 
   private var context: String = ""
 
@@ -43,15 +44,16 @@ class SpecLite extends Properties("") {
     def in[A](a: => A)(implicit ev: (A) => Prop): Unit = property(context + ":" + s) = Prop(ev(a)(_))
   }
 
-  implicit def enrichString(s: String) = new StringOps(s)
+  implicit def enrichString(s: String): StringOps = new StringOps(s)
 
   def check(x: => Boolean): Prop = {
-    x must_==(true)
+    Prop.secure(x must_== true)
   }
 
   def fail(msg: String): Nothing = throw new AssertionError(msg)
 
   class AnyOps[A](actual: => A) {
+    @targetName("mustEqual")
     def must_==(expected: A): Unit = {
       val act = actual
       def test = expected == act
@@ -73,7 +75,8 @@ class SpecLite extends Properties("") {
       b
     }
 
-    def mustBe_<(x: Int)(implicit ev: A <:< Int) = {
+    @targetName("mustBeInferiorTo")
+    def mustBe_<(x: Int)(implicit ev: A <:< Int): Unit = {
       val act = actual
       def test = ev(act) < x
       def koMessage = "%s <! %s".format(actual, x)

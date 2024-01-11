@@ -18,7 +18,7 @@ object TristateTests extends SpecLite {
     ))
   }
 
-  "present preserved through Option" ! forAll { x: Tristate[Int] => !x.isUnspecified ==>
+  "present preserved through Option" ! forAll { (x: Tristate[Int]) => !x.isUnspecified ==>
     propBoolean(Tristate.fromOption(x.toOption) == x)
   }
 
@@ -26,13 +26,13 @@ object TristateTests extends SpecLite {
     propBoolean(Tristate.fromOption(x specify y) == x)
   }
 
-  "unspecified specifies to default" ! forAll { x: Option[Int] => unspecified specify x must_== x }
+  "unspecified specifies to default" ! forAll { (x: Option[Int]) => unspecified specify x must_== x }
 
-  "present is present" ! forAll { x: Int => present(x).isPresent }
+  "present is present" ! forAll { (x: Int) => present(x).isPresent }
 
-  "present isn't absent" ! forAll { x: Int => !present(x).isAbsent }
+  "present isn't absent" ! forAll { (x: Int) => !present(x).isAbsent }
 
-  "present isn't unspecified" ! forAll { x: Int => !present(x).isUnspecified }
+  "present isn't unspecified" ! forAll { (x: Int) => !present(x).isUnspecified }
 
   "absent is absent" ! check(absent.isAbsent)
 
@@ -46,15 +46,15 @@ object TristateTests extends SpecLite {
 
   "unspecified isn't absent" ! check (!unspecified.isAbsent)
 
-  "present to option is Some" ! forAll { x: Int => present(x).toOption == Some(x) }
+  "present to option is Some" ! forAll { (x: Int) => present(x).toOption.contains(x) }
 
-  "absent or unspecified to option is None" ! forAll { x: Tristate[Int] => !x.isPresent ==>
-    propBoolean(x.toOption == None)
+  "absent or unspecified to option is None" ! forAll { (x: Tristate[Int]) => !x.isPresent ==>
+    propBoolean(x.toOption.isEmpty)
   }
 
-  "present to list is non-empty" ! forAll { x: Int => present(x).toList == List(x) }
+  "present to list is non-empty" ! forAll { (x: Int) => present(x).toList == List(x) }
 
-  "absent or unspecified to list is empty" ! forAll { x: Tristate[Int] => !x.isPresent ==>
+  "absent or unspecified to list is empty" ! forAll { (x: Tristate[Int]) => !x.isPresent ==>
     propBoolean(x.toList == Nil)
   }
 

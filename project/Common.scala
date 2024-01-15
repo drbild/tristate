@@ -1,20 +1,13 @@
-import sbt._
-import Keys._
-
-import Dependencies.{Libs, V}
+import Dependencies.Libs
+import sbt.*
+import sbt.Keys.*
 
 object Common {
 
-  val projectPrompt = { state: State =>
-    val extracted = Project.extract(state)
-    import extracted._
-    (name in currentRef get structure.data).map { name =>
-      "[" + name + "] $ "
-    }.getOrElse("> ")
-  }
 
-  val commonSettings: Seq[Setting[_]] = Seq(
-    scalaVersion := "3.1.2",
+
+  val commonSettings: Seq[Setting[?]] = Seq(
+    scalaVersion := "3.3.1",
 
     scalacOptions ++=  Seq(
       "-deprecation",
@@ -30,9 +23,8 @@ object Common {
     updateOptions := updateOptions.value.withCachedResolution(true),
     resolvers     ++= Dependencies.resolvers,
 
-    libraryDependencies ++= Libs.at(scalaVersion.value)(
-      Libs.scalaCheck
-    ),
+    libraryDependencies ++= Seq(Libs.scalaCheck)
+    ,
 
     autoAPIMappings := true,
 
@@ -51,8 +43,6 @@ object Common {
     organizationName := "David R. Bild",
     startYear        := Some(2016),
 
-    // sbt console prompt
-    shellPrompt     := projectPrompt
   )
 
   /* strip test deps from pom */

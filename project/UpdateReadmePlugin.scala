@@ -1,8 +1,6 @@
-import sbt._
-import sbt.Keys._
-
-import sbtrelease.ReleasePlugin
-import sbtrelease.ReleasePlugin.autoImport._
+import sbt.Keys.*
+import sbt.{Def, *}
+import sbtrelease.ReleasePlugin.autoImport.*
 import sbtrelease.Vcs
 
 object UpdateReadmePlugin extends AutoPlugin {
@@ -14,16 +12,16 @@ object UpdateReadmePlugin extends AutoPlugin {
     val commitReadme        = taskKey[Unit]("The task to commit the readme file to VCS.")
   }
 
-  import autoImport._
+  import autoImport.*
 
   private def commitReadmeDefault(file: File, optVcs: Option[Vcs], log: Logger): Unit = {
   }
 
   override def trigger = allRequirements
 
-  override lazy val projectSettings = Seq(
+  override lazy val projectSettings: Seq[Def.Setting[?]] = Seq(
     readmeFile          := file("README.md"),
-    readmeCommitMessage := s"readme: bump deps to ${(version in ThisBuild).value}",
+    readmeCommitMessage := s"readme: bump deps to ${(ThisBuild/ version ).value}",
 
 
     updateReadme := readmeFile.synchronized { // Ensure subprojects update the readme file atomically
@@ -34,13 +32,13 @@ object UpdateReadmePlugin extends AutoPlugin {
       val n    = name.value
       val v    = version.value
 
-      val pattern = (s"""(\\s*)libraryDependencies \\+= "${o}" %% "${n}" % "(.+)"(.*)""").r
-      val readme  = IO.readLines(file).map{ _ match {
+      val pattern = s"""(\\s*)libraryDependencies \\+= "$o" %% "$n" % "(.+)"(.*)""".r
+      val readme  = IO.readLines(file).map {
         case pattern(left, _, right) =>
-          s"""${left}libraryDependencies += "${o}" %% "${n}" % "${v}"${right}"""
-        case line @ _ =>
+          s"""${left}libraryDependencies += "$o" %% "$n" % "$v"$right"""
+        case line@_ =>
           line
-      }}
+      }
       IO.writeLines(file, readme)
     },
 
@@ -57,7 +55,7 @@ object UpdateReadmePlugin extends AutoPlugin {
       vcs.add(relative).!
       val status = vcs.status.!!.trim
       if (status.nonEmpty) {
-        vcs.commit(message, false).!
+        vcs.commit(message, sign = false).!
       }
     }
   )

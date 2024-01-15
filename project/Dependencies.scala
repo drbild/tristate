@@ -8,42 +8,35 @@ object Dependencies {
 
   // Versions
   object V {
-    val scalaz     = (sv: String) => "7.3.8"
-    val cats       = (sv: String) => "2.10.0"
-    val play       = (sv: String) => "3.0.1"
+    val scalaz = "7.3.8"
+    val cats = "2.10.0"
+    val play = "3.0.1"
 
-    val scalaCheck          =    (sv: String) => "1.17.0"
-    val scalaTest           =    (sv: String) => "3.2.17"
-    val specs2              =    (sv: String) => "5.4.2"
-    val scalazScalaCheck    =    (sv: String) => "7.3.8"
+    val scalaCheck = "1.17.0"
+    val scalaTest = "3.2.17"
+    val specs2 = "5.4.2"
+    val scalazScalaCheck = "7.3.8"
 
-    val disciplineScalaTest =    (vs: String) => "2.2.0"
-
-    def key(sv: String) =
-      CrossVersion.partialVersion(sv) match {
-        case Some((a, b)) => s"$a.$b"
-        case _            => ???
-      }
+    val disciplineScalaTest = "2.2.0"
 
   }
 
   // Libraries
   object Libs {
-    val scalaz              =  (sv: String) => "org.scalaz"         %% "scalaz-core"               % V.scalaz(sv)
-    val scalazScalaCheck    =  (sv: String) => "org.scalaz"         %% "scalaz-scalacheck-binding" % V.scalazScalaCheck(sv)    % "test"
+    val scalaz = "org.scalaz" %% "scalaz-core" % V.scalaz
+    val scalazScalaCheck = "org.scalaz" %% "scalaz-scalacheck-binding" % V.scalazScalaCheck % "test"
 
-    val cats                =  (sv: String) => "org.typelevel"      %% "cats-core"                 % V.cats(sv)
-    val catsLaws            =  (sv: String) => "org.typelevel"      %% "cats-laws"                 % V.cats(sv)                % "test"
-    val disciplineScalaTest =  (sv: String) => "org.typelevel"      %% "discipline-scalatest"      % V.disciplineScalaTest(sv) % "test"
+    val cats = "org.typelevel" %% "cats-core" % V.cats
+    val catsLaws = "org.typelevel" %% "cats-laws" % V.cats % "test"
+    val disciplineScalaTest = "org.typelevel" %% "discipline-scalatest" % V.disciplineScalaTest % "test"
 
-    val playJson            =  (sv: String) => "org.playframework"  %% "play-json"                 % V.play(sv)
+    val playJson = "org.playframework" %% "play-json" % V.play
 
-    val scalaCheck          =  (sv: String) => "org.scalacheck"     %% "scalacheck"                % V.scalaCheck(sv)          % "test"
-    val scalaTest           =  (sv: String) => "org.scalatest"      %% "scalatest"                 % V.scalaTest(sv)           % "test"
-    val specs2              =  (sv: String) => "org.specs2"         %% "specs2-core"               % V.specs2(sv)              % "test"
+    val scalaCheck = "org.scalacheck" %% "scalacheck" % V.scalaCheck % "test"
+    val scalaTest = "org.scalatest" %% "scalatest" % V.scalaTest % "test"
+    val specs2 = "org.specs2" %% "specs2-core" % V.specs2 % "test"
 
-    def at(sv: String)(libs: String => ModuleID*): Seq[sbt.ModuleID] =
-      libs map { _(sv) }
+
   }
 
 }

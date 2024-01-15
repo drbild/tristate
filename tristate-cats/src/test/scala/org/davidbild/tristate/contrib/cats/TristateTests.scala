@@ -31,7 +31,7 @@ class TristateTests extends AnyFunSuite with Matchers with ScalaCheckPropertyChe
     absent[String].show should === ("Absent")
     unspecified[String].show should === ("Unspecified")
 
-    forAll { fs: Tristate[String] =>
+    forAll { (fs: Tristate[String]) =>
       fs.show should === (fs.toString)
     }
   }

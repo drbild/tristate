@@ -2,15 +2,26 @@ package org.davidbild.tristate.contrib.play
 
 import org.scalacheck.Arbitrary
 import org.scalacheck.Gen.{const, sized, frequency}
-import org.scalacheck.Prop._
+import org.scalacheck.Prop.*
 
-import play.api.libs.functional.syntax._
-import play.api.libs.json._
+import play.api.libs.functional.syntax.*
+import play.api.libs.json.*
 
 import org.davidbild.tristate.{SpecLite, Tristate}
 
-object TristateJsonSpec extends SpecLite {
+case class UserPatch(title: Tristate[String], suffix: Tristate[String])
+
+object UserPatch {
+  implicit val UserFormat: OFormat[UserPatch] =
+    ((__ \ "title").formatTristate[String] and
+      (__ \ "suffix").formatTristate[String]
+      )(UserPatch.apply, u => (u.title, u.suffix))
+}
+
+object TristateTests extends SpecLite {
+
   import Tristate._
+  import UserPatch.*
 
   private implicit def arbTristate[A: Arbitrary]: Arbitrary[Tristate[A]] = {
     val arb = implicitly[Arbitrary[A]]
@@ -23,16 +34,10 @@ object TristateJsonSpec extends SpecLite {
     ))
   }
 
-  case class UserPatch(title: Tristate[String], suffix: Tristate[String])
-
-  implicit val UserFormat: Format[UserPatch] =
-    ((__ \ "title").formatTristate[String] and
-     (__ \ "suffix").formatTristate[String]
-    )(UserPatch, unlift(UserPatch.unapply))
-
-  "roundtrip" ! forAll { (title: Tristate[String], suffix: Tristate[String]) => {
+  "roundTrip" ! forAll { (title: Tristate[String], suffix: Tristate[String]) => {
     val patch = UserPatch(title, suffix)
     UserFormat.reads(UserFormat.writes(patch)) must_== JsSuccess(patch)
-  }}
+  }
+  }
 
 }

@@ -6,7 +6,8 @@ import scala.annotation.targetName
 import scala.reflect.ClassTag
 
 class SpecLite extends Properties("") {
-  override val name: String = this.getClass.getName.stripSuffix("$")
+  
+ // override val name: String = this.getClass.getName.stripSuffix("$")
 
   def checkAll(name: String, props: Properties): Unit = {
     for ((name2, prop) <- props.properties) yield {

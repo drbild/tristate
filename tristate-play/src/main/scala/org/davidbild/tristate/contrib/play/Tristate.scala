@@ -18,7 +18,7 @@ package org.davidbild.tristate.contrib.play
 
 import org.davidbild.tristate.Tristate
 import org.davidbild.tristate.Tristate.{Absent, Present, Unspecified}
-import play.api.libs.json._
+import play.api.libs.json.*
 
 final class JsPathOps(self: JsPath) {
 
@@ -38,7 +38,7 @@ final class JsPathOps(self: JsPath) {
     TristateFormat.tristate[T](self)(f)
 
   def lazyFormatTristate[T](f: => Format[T]): OFormat[Tristate[T]] =
-    OFormat[Tristate[T]](lazyReadTristate(f), lazyWriteTristate(f))
+    OFormat[Tristate[T]](r = lazyReadTristate(f), w = lazyWriteTristate(f))
 }
 
 trait ToJsPathOps {

@@ -24,7 +24,7 @@ package org.davidbild.tristate
  */
 sealed abstract class Tristate[+A] extends Product with Serializable {
 
-  import Tristate._
+  import Tristate.*
 
   final def cata[B](f: A => B, ifAbsent: => B, ifUnspecified: => B): B =
     this match {
